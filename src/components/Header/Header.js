@@ -1,19 +1,35 @@
-import {useState} from 'react'
+import { useState } from "react";
 
-export function Header () {
-    const [showHeader, setShowHeader] = useState(true)
-    const handleStartClick = ()=>{
-        setShowHeader(!showHeader)
+export function Header(props) {
+  const [showHeader, setShowHeader] = useState(true);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleStartClick = () => {
+    setShowHeader(!showHeader);
+    if(props.onClick){
+
+        props.onClick(parseInt(inputValue));
     }
+  };
 
-    return (
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
+  return (
+    <>
+      {showHeader && (
         <>
-            {showHeader &&
-                <>
-                    <input type='number' name='size' placeholder='Introduce the size of table' />
-                    <div onClick={handleStartClick}>Start!</div>
-                </>
-            }
+          <input
+            type="number"
+            name="size"
+            placeholder="Introduce the size of table"
+            onChange={handleInputChange}
+            value={inputValue}
+          />
+          <div onClick={handleStartClick}>Start!</div>
         </>
-    )
+      )}
+    </>
+  );
 }

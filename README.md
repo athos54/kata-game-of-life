@@ -8,5 +8,5 @@ RULES
 
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
-Eric
-comentario de wafa
+
+18/01/2021 Wafa empezar a hacer el test
