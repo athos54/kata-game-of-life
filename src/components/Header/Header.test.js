@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { Header } from "./Header.js";
 
 describe("header component", () => {
-
   it("input should contain placeholder eq to Introduce the size of table", () => {
     render(<Header />);
 
@@ -14,21 +13,40 @@ describe("header component", () => {
 
   it("when click on start element header should disappear", () => {
     render(<Header />);
-    
-    userEvent.click(screen.getByText('Start!'))
-    expect(screen.queryByText('Start!')).not.toBeInTheDocument()
-  })
 
-  it('when click on start, input text should pass to parent props method', ()=>{
+    userEvent.click(screen.getByText("Start!"));
+    expect(screen.queryByText("Start!")).not.toBeInTheDocument();
+  });
 
-    const onClickMock = jest.fn()
+  it("when click on start, input text should pass to parent props method", () => {
+    const onClickMock = jest.fn();
 
-    render(<Header onClick={onClickMock}/>);
+    render(<Header onClick={onClickMock} />);
 
-    userEvent.type(screen.getByPlaceholderText("Introduce the size of table"),'7')
-    userEvent.click(screen.getByText('Start!'))
+    userEvent.type(
+      screen.getByPlaceholderText("Introduce the size of table"),
+      "7"
+    );
+    userEvent.click(screen.getByText("Start!"));
 
-    expect(onClickMock).toHaveBeenCalledWith(7)
+    expect(onClickMock).toHaveBeenCalledWith(7);
+  });
 
-  })
+  it("when click on start, a table should exist according to size", () => {
+    const onClickMock = jest.fn();
+    render(<Header onClick={onClickMock} />);
+
+    const tableSize = 2;
+    userEvent.click(screen.getByText("Start!"));
+
+    const table = screen.queryByRole("table");
+    const tbody = screen.queryByRole("rowgroup");
+    const rows = screen.queryAllByRole("row");
+    const cells = screen.queryAllByRole("cell");
+
+    expect(table).toBeInTheDocument();
+    expect(tbody).toBeInTheDocument();
+    expect(rows).toHaveLength(tableSize);
+    expect(cells).toHaveLength(tableSize * tableSize);
+  });
 });

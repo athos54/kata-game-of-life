@@ -9,4 +9,4 @@ RULES
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 
-18/01/2021 Wafa empezar a hacer el test
+18/01/2021 Eric resolver test

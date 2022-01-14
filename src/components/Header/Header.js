@@ -2,13 +2,12 @@ import { useState } from "react";
 
 export function Header(props) {
   const [showHeader, setShowHeader] = useState(true);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleStartClick = () => {
     setShowHeader(!showHeader);
-    if(props.onClick){
-
-        props.onClick(parseInt(inputValue));
+    if (props.onClick) {
+      props.onClick(parseInt(inputValue));
     }
   };
 
