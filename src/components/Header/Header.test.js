@@ -31,22 +31,4 @@ describe("header component", () => {
 
     expect(onClickMock).toHaveBeenCalledWith(7);
   });
-
-  it("when click on start, a table should exist according to size", () => {
-    const onClickMock = jest.fn();
-    render(<Header onClick={onClickMock} />);
-
-    const tableSize = 2;
-    userEvent.click(screen.getByText("Start!"));
-
-    const table = screen.queryByRole("table");
-    const tbody = screen.queryByRole("rowgroup");
-    const rows = screen.queryAllByRole("row");
-    const cells = screen.queryAllByRole("cell");
-
-    expect(table).toBeInTheDocument();
-    expect(tbody).toBeInTheDocument();
-    expect(rows).toHaveLength(tableSize);
-    expect(cells).toHaveLength(tableSize * tableSize);
-  });
 });
