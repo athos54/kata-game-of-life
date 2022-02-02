@@ -60,7 +60,6 @@ describe("app component", () => {
   });
 
   it("when click on start, the table should exist according and cell value 0", async () => {
-    //@TODO uncomplete test
     render(<App />);
 
     const tableSize = 3;
@@ -69,7 +68,29 @@ describe("app component", () => {
       tableSize + ""
     );
     userEvent.click(screen.getByText("Start!"));
-    const text = await screen.findAllByText("0");
-    expect(text.length).toBe(tableSize * tableSize);
+    const ones = await screen.findAllByText("1");
+    const zeros = await screen.findAllByText("0");
+    expect(ones.length).toBeGreaterThan(0);
+    expect(zeros.length).toBeGreaterThan(0);
+    expect(ones.length+zeros.length).toBe(tableSize * tableSize);
+  });
+
+  it("when click on start, current day value should be 0 and when click on btn next day, current day should be 1", async () => {
+    render(<App />);
+
+    const tableSize = 3;
+    userEvent.type(
+      screen.getByPlaceholderText("Introduce the size of table"),
+      tableSize + ""
+    );
+    userEvent.click(screen.getByText("Start!"));
+
+    let currentDay = await screen.findByText("current day: 0");
+    expect(currentDay).toBeInTheDocument();
+
+    userEvent.click(screen.getByText("Next day"));
+
+    currentDay = await screen.findByText("current day: 1");
+    expect(currentDay).toBeInTheDocument();
   });
 });

@@ -14,6 +14,8 @@ function App() {
     <div className="App">
       learn react
       <Header onClick={handleClickHeader} />
+      <button onClick={game.nextDay}>Next day</button>
+      <p>current day: {game.currentDay}</p>
       {game.tableStatus !== null && <Game tableStatus={game.tableStatus} />}
     </div>
   );

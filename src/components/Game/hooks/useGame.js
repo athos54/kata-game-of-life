@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export const useGame = () => {
   const [tableStatus, setTableStatus] = useState(null);
+  const [currentDay, setCurrentDay] = useState(0);
 
   const generateTableStatus = ({ tableSize }) => {
     /**
@@ -20,15 +21,21 @@ export const useGame = () => {
     for (let i = 0; i < tableSize; i++) {
       table.rows.push({ cells: [] });
       for (let j = 0; j < tableSize; j++) {
-        table.rows[i].cells.push(0); //@TODO this should be a random value with 0 or 1
+        table.rows[i].cells.push(Math.round(Math.random()));
       }
     }
 
     setTableStatus(table);
   };
 
+  const nextDay = () => {
+    setCurrentDay(currentDay + 1);
+  };
+
   return {
     tableStatus,
     generateTableStatus,
+    nextDay,
+    currentDay,
   };
 };
